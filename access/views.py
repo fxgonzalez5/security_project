@@ -11,6 +11,8 @@ def registro(request):
         form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.status = True
+            user.save()
             login(request, user)  # Inicia sesión automáticamente después del registro
             return redirect('dashboard')
     else:
@@ -31,8 +33,13 @@ def iniciar_sesion(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('dashboard')
+                if not user.status:
+                    user.status = True
+                    user.save()
+                    login(request, user)
+                    return redirect('dashboard')
+                else:
+                    form.add_error(None, "El usuario ya tiene una sesión activa.")
             else:
                 form.add_error(None, "Usuario o contraseña incorrectos")
     else:
@@ -41,6 +48,9 @@ def iniciar_sesion(request):
 
 
 def cerrar_sesion(request):
+    if request.user.is_authenticated:
+        request.user.status = False
+        request.user.save()
     logout(request)
     return redirect('login')
 

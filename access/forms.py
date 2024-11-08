@@ -7,7 +7,7 @@ class RegistroForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['name', 'username', 'password']  # Incluye otros campos que necesites
+        fields = ['name', 'email', 'username', 'password']  # Incluye otros campos que necesites
 
     def save(self, commit=True):
         # Guardar la contraseña encriptada

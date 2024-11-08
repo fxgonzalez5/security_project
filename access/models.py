@@ -6,7 +6,7 @@ from django.db import models
 class User(AbstractUser):
     name = models.CharField(max_length=45)
     password = models.CharField(max_length=45)
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(default=False)
     roles = models.ManyToManyField('Role', through='UserRole')
 
     def __str__(self):

@@ -35,7 +35,7 @@
 
                 <span class="login100-form-title p-b-49">
                         Inicio de Sesión
-                    </span>
+                </span>
 
                 <!-- Campo de Nombre de Usuario -->
                 <div class="wrap-input100 validate-input m-b-23" data-validate="Username is required">
@@ -73,6 +73,11 @@
     </div>
 </div>
 
+{% if form.non_field_errors %}
+    <script>
+        alert("{% for error in form.non_field_errors %}{{ error }}{% if not forloop.last %}\n{% endif %}{% endfor %}");
+    </script>
+{% endif %}
 
 <div id="dropDownSelect1"></div>
 
