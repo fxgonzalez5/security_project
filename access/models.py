@@ -7,6 +7,8 @@ class User(AbstractUser):
     name = models.CharField(max_length=45)
     password = models.CharField(max_length=45)
     status = models.BooleanField(default=False)
+    verification_code = models.CharField(max_length=6, blank=True, null=True)
+    code_generated_at = models.DateTimeField(null=True, blank=True)
     roles = models.ManyToManyField('Role', through='UserRole')
 
     def __str__(self):

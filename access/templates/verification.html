@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification</title>
+</head>
+<body>
+<h1>Verificación de Código</h1>
+
+{% if error %}
+    <div class="error">{{ error }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="code">Ingresa el código enviado a tu correo:</label>
+    <input type="text" name="code" id="code" required>
+    <button type="submit">Validar</button>
+</form>
+</body>
+</html>
