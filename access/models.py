@@ -14,7 +14,7 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.roles.exists():
-            cliente_role, created = Role.objects.get_or_create(description="Cliente")
+            cliente_role, created = Role.objects.get_or_create(description="Invitado")
             UserRole.objects.get_or_create(user=self, role=cliente_role)
 
     def __str__(self):

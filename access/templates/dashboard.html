@@ -40,7 +40,7 @@
                         <ul>
                             {% for role in user.roles.all %}
                                 {% for function in role.functions.all %}
-                                    <li>{{ function.name }}</li>
+                                    <li>{{ function.description }}</li>
                                 {% endfor %}
                             {% endfor %}
                         </ul>
