@@ -11,6 +11,12 @@ class User(AbstractUser):
     code_generated_at = models.DateTimeField(null=True, blank=True)
     roles = models.ManyToManyField('Role', through='UserRole')
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.roles.exists():
+            cliente_role, created = Role.objects.get_or_create(description="Cliente")
+            UserRole.objects.get_or_create(user=self, role=cliente_role)
+
     def __str__(self):
         return "Usuario: %s - %s - %s - %s" % (self.name, self.username, self.password, self.status)
 

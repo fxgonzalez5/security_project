@@ -97,7 +97,7 @@ def cerrar_sesion(request):
 
 @login_required(login_url='login')
 def panel(request):
-    users = User.objects.all().prefetch_related('roles')
+    users = User.objects.exclude(id=request.user.id).prefetch_related('roles')
     context = {
         'users': users,
     }
